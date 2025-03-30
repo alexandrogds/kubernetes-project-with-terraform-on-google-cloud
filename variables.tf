@@ -27,6 +27,12 @@ variable "gke_node_machine_type" {
   default     = "e2-micro"
 }
 
+variable "gke_node_sa_name" {
+  description = "O nome curto para a conta de serviço dos nós do GKE."
+  type        = string
+  default     = "gke-node-sa"
+}
+
 variable "mail" {
   description = "O email do admin."
   type        = string
