@@ -30,6 +30,8 @@ GCLOUD_CONFIG=clouddeploy
 export PROJECT_ID=$(gcloud config get-value core/project)
 export REGION=us-east1
 
+TF_STATE_BUCKET=${PROJECT_ID}-terraform-state
+
 manage_apis() {
     # Enables any APIs that we need prior to Terraform being run
 
@@ -62,9 +64,11 @@ manage_configs() {
 
 run_terraform() {
     # Terraform workflows
+    gsutil mb gs://${TF_STATE_BUCKET} || true
+	gsutil versioning set on gs://${TF_STATE_BUCKET}/ || true
 
-    terraform init
-    terraform plan -out=terraform.tfplan  -var="project_id=$PROJECT_ID" -var="region=$REGION"
+    terraform init -backend-config="bucket=${TF_STATE_BUCKET}"
+    terraform plan -out=terraform.tfplan -var="project_id=$PROJECT_ID" -var="region=$REGION"
     terraform apply -auto-approve terraform.tfplan
 }
 

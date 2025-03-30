@@ -139,6 +139,29 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(data.google_container_cluster.my_cluster.master_auth[0].cluster_ca_certificate)
 }
 
+# Concede permissões de cluster-admin ao usuário que executa o Terraform
+resource "kubernetes_cluster_role_binding" "terraform_admin" {
+  metadata {
+    name = "terraform-user-cluster-admin"
+  }
+  role_ref {
+    api_group = "rbac.authorization.k8s.io"
+    kind      = "ClusterRole"
+    name      = "cluster-admin" # Papel com controle total
+  }
+  subject {
+    kind      = "User"
+    name      = data.google_client_openid_userinfo.me.email # Email do usuário do gcloud
+    api_group = "rbac.authorization.k8s.io"
+  }
+
+  # Garante que o cluster exista antes de tentar criar o binding
+  depends_on = [
+    google_container_cluster.primary,
+    google_container_node_pool.primary_nodes # Importante esperar o node pool tbm
+  ]
+}
+
 # --- Deployments Kubernetes ---
 
 # Deployment para o ambiente TEST
@@ -180,6 +203,10 @@ resource "kubernetes_deployment" "test_app" {
       }
     }
   }
+
+  depends_on = [
+    kubernetes_cluster_role_binding.terraform_admin
+  ]
 }
 
 # Deployment para o ambiente STAGING
@@ -221,6 +248,10 @@ resource "kubernetes_deployment" "staging_app" {
       }
     }
   }
+
+  depends_on = [
+    kubernetes_cluster_role_binding.terraform_admin
+  ]
 }
 
 # Deployment para o ambiente PROD
@@ -262,4 +293,8 @@ resource "kubernetes_deployment" "prod_app" {
       }
     }
   }
+
+  depends_on = [
+    kubernetes_cluster_role_binding.terraform_admin
+  ]
 }
