@@ -2,7 +2,7 @@
 # Esse arquivo é uma obra derivada do projeto
 # https://github.com/GoogleCloudPlatform/cloud-deploy-tutorials
 # do arquivo `tutorials/base/setup.sh`.
-# No arquivo setup.sh.LICENSE está uma cópia da licença para compliance.
+# No arquivo `setup.sh.LICENSE` está uma cópia da licença para compliance.
 # Esse arquivo deriva do original e foi modificado.
 
 # Copyright 2021 Google LLC
