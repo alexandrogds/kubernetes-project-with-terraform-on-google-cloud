@@ -151,7 +151,7 @@ resource "kubernetes_cluster_role_binding" "terraform_admin" {
   }
   subject {
     kind      = "User"
-    name      = data.google_client_openid_userinfo.me.email # Email do usuário do gcloud
+    name      = var.mail
     api_group = "rbac.authorization.k8s.io"
   }
 
