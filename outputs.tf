@@ -23,3 +23,7 @@ output "node_service_account_email" {
   description = "O email da conta de serviço usada pelos nós."
   value       = google_service_account.gke_node_sa.email
 }
+
+output "user_email" {
+  value = data.google_client_openid_userinfo.me.email
+}
