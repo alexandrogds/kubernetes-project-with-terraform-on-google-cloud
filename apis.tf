@@ -15,6 +15,10 @@
  */
 
 terraform {
+  backend "gcs" {
+    bucket="{{BACKEND_BUCKET}}"
+    prefix="foundation"
+  }
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -51,5 +55,6 @@ module "project-services" {
     # "clouddeploy.googleapis.com",         # Incluído no pedido, mas não usado diretamente aqui
     # "binaryauthorization.googleapis.com"  # Incluído no pedido, mas não usado diretamente aqui
     "artifactregistry.googleapis.com",    # Boa prática para pull de imagens (substituto do GCR)
+	"storage.googleapis.com",             # Necessário para o backend GCS
   ]
 }
