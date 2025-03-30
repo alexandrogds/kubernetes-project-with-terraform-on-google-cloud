@@ -59,5 +59,3 @@ module "project-services" {
 	"storage.googleapis.com",             # Necessário para o backend GCS
   ]
 }
-
-data "google_client_openid_userinfo" "me" {}

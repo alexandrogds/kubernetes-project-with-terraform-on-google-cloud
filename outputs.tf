@@ -24,10 +24,17 @@ output "node_service_account_email" {
   value       = google_service_account.gke_node_sa.email
 }
 
-output "user_email" {
-  value = data.google_client_openid_userinfo.me.email
+output "test_app_external_ip" {
+  description = "Endereço IP externo do serviço LoadBalancer para o ambiente TEST."
+  value       = kubernetes_service.test_app_service.status[0].load_balancer[0].ingress[0].ip
 }
 
-output "openid_userinfo" {
-  value = data.google_client_openid_userinfo.me
+output "staging_app_external_ip" {
+  description = "Endereço IP externo do serviço LoadBalancer para o ambiente STAGING."
+  value       = kubernetes_service.staging_app_service.status[0].load_balancer[0].ingress[0].ip
+}
+
+output "prod_app_external_ip" {
+  description = "Endereço IP externo do serviço LoadBalancer para o ambiente PROD."
+  value       = kubernetes_service.prod_app_service.status[0].load_balancer[0].ingress[0].ip
 }

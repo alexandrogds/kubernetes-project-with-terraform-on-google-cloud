@@ -298,3 +298,82 @@ resource "kubernetes_deployment" "prod_app" {
     kubernetes_cluster_role_binding.terraform_admin
   ]
 }
+
+# --- Serviços Kubernetes (LoadBalancer) ---
+
+# Serviço para expor o Deployment TEST
+resource "kubernetes_service" "test_app_service" {
+  metadata {
+    name = "test-app-service" # Nome do serviço Kubernetes
+    labels = {
+      app = kubernetes_deployment.test_app.metadata[0].labels.app
+      env = kubernetes_deployment.test_app.metadata[0].labels.env
+    }
+  }
+  spec {
+    selector = {
+      # Seleciona os pods criados pelo deployment de TEST
+      app = kubernetes_deployment.test_app.spec[0].template[0].metadata[0].labels.app
+      env = kubernetes_deployment.test_app.spec[0].template[0].metadata[0].labels.env
+    }
+    port {
+      port        = 80 # Porta que o Load Balancer externo escutará
+      target_port = 80 # Porta que o container (nginx) dentro do Pod escuta
+      protocol    = "TCP"
+    }
+    type = "LoadBalancer" # Tipo de serviço para obter um IP público via Load Balancer do GCP
+  }
+
+  # Garante que o deployment exista antes de tentar criar o serviço
+  # Embora não estritamente necessário para criação (o LB pode esperar pelos pods),
+  # é uma boa prática para clareza.
+  depends_on = [kubernetes_deployment.test_app]
+}
+
+# Serviço para expor o Deployment STAGING
+resource "kubernetes_service" "staging_app_service" {
+  metadata {
+    name = "staging-app-service"
+    labels = {
+      app = kubernetes_deployment.staging_app.metadata[0].labels.app
+      env = kubernetes_deployment.staging_app.metadata[0].labels.env
+    }
+  }
+  spec {
+    selector = {
+      app = kubernetes_deployment.staging_app.spec[0].template[0].metadata[0].labels.app
+      env = kubernetes_deployment.staging_app.spec[0].template[0].metadata[0].labels.env
+    }
+    port {
+      port        = 80
+      target_port = 80
+      protocol    = "TCP"
+    }
+    type = "LoadBalancer"
+  }
+  depends_on = [kubernetes_deployment.staging_app]
+}
+
+# Serviço para expor o Deployment PROD
+resource "kubernetes_service" "prod_app_service" {
+  metadata {
+    name = "prod-app-service"
+    labels = {
+      app = kubernetes_deployment.prod_app.metadata[0].labels.app
+      env = kubernetes_deployment.prod_app.metadata[0].labels.env
+    }
+  }
+  spec {
+    selector = {
+      app = kubernetes_deployment.prod_app.spec[0].template[0].metadata[0].labels.app
+      env = kubernetes_deployment.prod_app.spec[0].template[0].metadata[0].labels.env
+    }
+    port {
+      port        = 80
+      target_port = 80
+      protocol    = "TCP"
+    }
+    type = "LoadBalancer"
+  }
+  depends_on = [kubernetes_deployment.prod_app]
+}
