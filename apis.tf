@@ -20,6 +20,10 @@ terraform {
       source  = "hashicorp/google"
       version = "~> 5.0" # Use uma versão recente
     }
+	kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.20" # Use uma versão recente
+    }
   }
 }
 

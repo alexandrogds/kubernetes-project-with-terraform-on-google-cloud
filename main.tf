@@ -1,15 +1,15 @@
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 5.0"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.20" # Use uma versão recente
-    }
-  }
-}
+#terraform {
+#  required_providers {
+#    google = {
+#      source  = "hashicorp/google"
+#      version = "~> 5.0"
+#    }
+#    kubernetes = {
+#      source  = "hashicorp/kubernetes"
+#      version = "~> 2.20" # Use uma versão recente
+#    }
+#  }
+#}
 
 #provider "google" {
 #  # Configurado em apis.tf
