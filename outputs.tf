@@ -27,3 +27,7 @@ output "node_service_account_email" {
 output "user_email" {
   value = data.google_client_openid_userinfo.me.email
 }
+
+output "openid_userinfo" {
+  value = data.google_client_openid_userinfo.me
+}
