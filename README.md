@@ -9,7 +9,7 @@ terraform init
 ## Planeje a Aplicação: Veja o que o Terraform fará:
 
 ```
-terraform plan
+terraform plan -var="project_id=$PROJECT_ID"
 ```
 
 ## Aplique a Configuração: Crie os recursos no Google Cloud:

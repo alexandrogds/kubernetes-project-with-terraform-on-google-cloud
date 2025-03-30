@@ -173,7 +173,7 @@ resource "kubernetes_deployment" "test_app" {
         container {
           image = "nginx:alpine" # Imagem de exemplo
           name  = "nginx-test"
-          ports {
+          port {
             container_port = 80
           }
         }
@@ -214,7 +214,7 @@ resource "kubernetes_deployment" "staging_app" {
         container {
           image = "nginx:alpine" # Imagem de exemplo
           name  = "nginx-staging"
-          ports {
+          port {
             container_port = 80
           }
         }
@@ -255,7 +255,7 @@ resource "kubernetes_deployment" "prod_app" {
         container {
           image = "nginx:alpine" # Imagem de exemplo
           name  = "nginx-prod"
-          ports {
+          port {
             container_port = 80
           }
         }
