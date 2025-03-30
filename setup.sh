@@ -1,52 +1,36 @@
 
-export_vars() {
-	# Copyright 2021 Google LLC
-	#
-	# Licensed under the Apache License, Version 2.0 (the "License");
-	# you may not use this file except in compliance with the License.
-	# You may obtain a copy of the License at
-	#
-	#      http://www.apache.org/licenses/LICENSE-2.0
-	#
-	# Unless required by applicable law or agreed to in writing, software
-	# distributed under the License is distributed on an "AS IS" BASIS,
-	# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	# See the License for the specific language governing permissions and
-	# limitations under the License.
+# Esse arquivo é uma obra derivada do projeto
+# https://github.com/GoogleCloudPlatform/cloud-deploy-tutorials
+# do arquivo `tutorials/base/setup.sh`.
+# No arquivo setup.sh.LICENSE está uma cópia da licença para compliance.
+# Esse arquivo deriva do original e foi modificado.
 
-	# Standard functions begin with manage or run.
-	# Walkthrough-specific functions begin with the abbreviation for
-	# that walkthrough
-	# Current walkthroughs:
-	# e2e - End-to-end (aka primary) walkthrough
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-	GCLOUD_CONFIG=clouddeploy
+# Standard functions begin with manage or run.
+# Walkthrough-specific functions begin with the abbreviation for
+# that walkthrough
+# Current walkthroughs:
+# e2e - End-to-end (aka primary) walkthrough
 
-	export PROJECT_ID=$(gcloud config get-value core/project)
-	export REGION=us-east1
-}
+GCLOUD_CONFIG=clouddeploy
+
+export PROJECT_ID=$(gcloud config get-value core/project)
+export REGION=us-east1
 
 manage_apis() {
-	# Copyright 2021 Google LLC
-	#
-	# Licensed under the Apache License, Version 2.0 (the "License");
-	# you may not use this file except in compliance with the License.
-	# You may obtain a copy of the License at
-	#
-	#      http://www.apache.org/licenses/LICENSE-2.0
-	#
-	# Unless required by applicable law or agreed to in writing, software
-	# distributed under the License is distributed on an "AS IS" BASIS,
-	# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	# See the License for the specific language governing permissions and
-	# limitations under the License.
-
-	# Standard functions begin with manage or run.
-	# Walkthrough-specific functions begin with the abbreviation for
-	# that walkthrough
-	# Current walkthroughs:
-	# e2e - End-to-end (aka primary) walkthrough
-
     # Enables any APIs that we need prior to Terraform being run
 
     echo "Enabling GCP APIs, please wait, this may take several minutes..."
@@ -57,26 +41,6 @@ manage_apis() {
 }
 
 manage_configs() {
-	# Copyright 2021 Google LLC
-	#
-	# Licensed under the Apache License, Version 2.0 (the "License");
-	# you may not use this file except in compliance with the License.
-	# You may obtain a copy of the License at
-	#
-	#      http://www.apache.org/licenses/LICENSE-2.0
-	#
-	# Unless required by applicable law or agreed to in writing, software
-	# distributed under the License is distributed on an "AS IS" BASIS,
-	# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	# See the License for the specific language governing permissions and
-	# limitations under the License.
-
-	# Standard functions begin with manage or run.
-	# Walkthrough-specific functions begin with the abbreviation for
-	# that walkthrough
-	# Current walkthroughs:
-	# e2e - End-to-end (aka primary) walkthrough
-
     # Sets any SDK configs and ensures they'll persist across
     # Cloud Shell sessions
 
@@ -97,26 +61,6 @@ manage_configs() {
 }
 
 run_terraform() {
-	# Copyright 2021 Google LLC
-	#
-	# Licensed under the Apache License, Version 2.0 (the "License");
-	# you may not use this file except in compliance with the License.
-	# You may obtain a copy of the License at
-	#
-	#      http://www.apache.org/licenses/LICENSE-2.0
-	#
-	# Unless required by applicable law or agreed to in writing, software
-	# distributed under the License is distributed on an "AS IS" BASIS,
-	# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	# See the License for the specific language governing permissions and
-	# limitations under the License.
-
-	# Standard functions begin with manage or run.
-	# Walkthrough-specific functions begin with the abbreviation for
-	# that walkthrough
-	# Current walkthroughs:
-	# e2e - End-to-end (aka primary) walkthrough
-
     # Terraform workflows
 
     terraform init
@@ -124,31 +68,6 @@ run_terraform() {
     terraform apply -auto-approve terraform.tfplan
 }
 
-runs() {
-	# Copyright 2021 Google LLC
-	#
-	# Licensed under the Apache License, Version 2.0 (the "License");
-	# you may not use this file except in compliance with the License.
-	# You may obtain a copy of the License at
-	#
-	#      http://www.apache.org/licenses/LICENSE-2.0
-	#
-	# Unless required by applicable law or agreed to in writing, software
-	# distributed under the License is distributed on an "AS IS" BASIS,
-	# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	# See the License for the specific language governing permissions and
-	# limitations under the License.
-
-	# Standard functions begin with manage or run.
-	# Walkthrough-specific functions begin with the abbreviation for
-	# that walkthrough
-	# Current walkthroughs:
-	# e2e - End-to-end (aka primary) walkthrough
-
-	manage_apis()
-	manage_configs()
-	run_terraform()
-}
-
-export_vars()
-runs()
+manage_apis()
+manage_configs()
+run_terraform()
