@@ -11,9 +11,9 @@ terraform {
   }
 }
 
-provider "google" {
-  # Configurado em apis.tf
-}
+#provider "google" {
+#  # Configurado em apis.tf
+#}
 
 # Conta de Serviço para os Nós do GKE
 resource "google_service_account" "gke_node_sa" {
