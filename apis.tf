@@ -15,9 +15,10 @@
  */
 
 terraform {
+  # Configuração do Backend GCS
   backend "gcs" {
-    bucket="{{BACKEND_BUCKET}}"
-    prefix="foundation"
+    # O nome do bucket será fornecido durante a inicialização
+    prefix = "foundation" # Conforme solicitado
   }
   required_providers {
     google = {
